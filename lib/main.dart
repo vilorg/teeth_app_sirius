@@ -1,52 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:teeth_app_sirius/screens/general/general_screen.dart';
+
+import 'constants.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: "Зубки у малютки",
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        backgroundColor: kBackgroundColor,
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: kBackgroundColor,
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Зубки у малютки"),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.green,
-        ),
-        body: const Center(
-          child: Text(
-            "Зубки у малютки!",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-            ),
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: selectedIndex,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.star), label: "Health"),
-          ],
-          onTap: (value) => setState(() => selectedIndex = value),
-        ),
-      ),
+      home: const GeneralScreen(),
     );
   }
 }

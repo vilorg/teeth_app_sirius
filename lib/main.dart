@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teeth_app_sirius/screens/general/general_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:teeth_app_sirius/screens/start/start_screen.dart';
 
 import 'constants.dart';
 
@@ -17,12 +18,11 @@ class MyApp extends StatelessWidget {
       title: "Зубки у малютки",
       theme: ThemeData(
         backgroundColor: kBackgroundColor,
-        primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: kBackgroundColor,
-        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+        textTheme: GoogleFonts.montserratTextTheme(),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const GeneralScreen(),
+      home: const StartScreen(),
     );
   }
 }

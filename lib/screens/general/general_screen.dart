@@ -42,10 +42,8 @@ class _GeneralScreenState extends State<GeneralScreen> {
     );
   }
 
-  void _next() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const GeneralScreen()));
-  }
+  void _next() => Navigator.push(
+      context, MaterialPageRoute(builder: (context) => const GeneralScreen()));
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {
     return {
@@ -88,27 +86,27 @@ class _GeneralScreenState extends State<GeneralScreen> {
         BottomNavigationBarItem(
           icon: Icon(Icons.done),
           label: 'Мероприятия',
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.red
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.auto_graph_sharp),
           label: 'Прогноз',
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.green
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.purple
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.question_answer_rounded),
           label: 'FAQ',
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.pink
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           label: 'Settings',
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.grey
         ),
       ],
     );

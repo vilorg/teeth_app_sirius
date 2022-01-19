@@ -73,3 +73,14 @@ List<DataQuestion> getQuestions() {
     ),
   ];
 }
+
+class Area {
+  String name;
+  int value;
+
+  Area(this.name, this.value);
+}
+
+List<Area> getAreas() {
+  return [];
+}

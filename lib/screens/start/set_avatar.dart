@@ -3,9 +3,16 @@ import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/start/set_last_visit.dart';
 
 class SetAvatar extends StatefulWidget {
-  const SetAvatar({Key? key, required this.color}) : super(key: key);
+  const SetAvatar({
+    Key? key,
+    required this.color,
+    required this.name,
+    required this.age,
+  }) : super(key: key);
 
   final Color color;
+  final String name;
+  final int age;
 
   @override
   State<SetAvatar> createState() => _SetAvatarState();
@@ -159,12 +166,14 @@ class _SetAvatarState extends State<SetAvatar> with TickerProviderStateMixin {
       ),
     );
 
-    var choose = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        girl,
-        boy,
-      ],
+    var choose = SingleChildScrollView(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          girl,
+          boy,
+        ],
+      ),
     );
 
     var arrowPrev = Padding(
@@ -198,6 +207,60 @@ class _SetAvatarState extends State<SetAvatar> with TickerProviderStateMixin {
       ),
     );
 
+    var title = Text(
+      "Выберите\nаватар",
+      style: Theme.of(context).textTheme.headline1!.copyWith(
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+            color: Colors.black,
+          ),
+      textAlign: TextAlign.center,
+    );
+
+    var subTitle = Text(
+      "Выберите аватарку для профиля",
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(),
+      textAlign: TextAlign.center,
+    );
+
+    var btnValue = Container(
+      width: MediaQuery.of(context).size.width / 2,
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(kDeffaultPadding),
+      ),
+      child: ElevatedButton(
+        onPressed: () {
+          if (isSelect)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SetLastVisit(
+                  color: widget.color,
+                  name: widget.name,
+                  age: widget.age,
+                ),
+              ),
+            );
+        },
+        child: Text(
+          "Далее",
+          style: Theme.of(context).textTheme.headline6!.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -210,57 +273,11 @@ class _SetAvatarState extends State<SetAvatar> with TickerProviderStateMixin {
                   Spacer(flex: 2),
                   choose,
                   const SizedBox(height: 3 * kDeffaultPadding),
-                  Text(
-                    "Выберите\nаватар",
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.black,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
+                  title,
                   const SizedBox(height: 2 * kDeffaultPadding),
-                  Text(
-                    "  Выберите аватарку для профиля",
-                    style: Theme.of(context).textTheme.bodyText1!.copyWith(),
-                    textAlign: TextAlign.center,
-                  ),
+                  subTitle,
                   const SizedBox(height: 2 * kDeffaultPadding),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(kDeffaultPadding),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (isSelect)
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  SetLastVisit(color: widget.color),
-                            ),
-                          );
-                      },
-                      child: Text(
-                        "Далее",
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(widget.color),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  btnValue,
                   Spacer(),
                 ],
               ),

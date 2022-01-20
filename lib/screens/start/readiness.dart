@@ -4,9 +4,18 @@ import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/questions.dart';
 
 class Readiness extends StatelessWidget {
-  const Readiness({Key? key, required this.color}) : super(key: key);
+  const Readiness({
+    Key? key,
+    required this.color,
+    required this.date,
+    required this.name,
+    required this.age,
+  }) : super(key: key);
 
   final Color color;
+  final DateTime date;
+  final String name;
+  final int age;
 
   @override
   Widget build(BuildContext context) {

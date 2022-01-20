@@ -3,7 +3,7 @@ import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/set_age.dart';
 
-class SetName extends StatelessWidget {
+class SetName extends StatefulWidget {
   final Color color;
   const SetName({
     Key? key,
@@ -11,10 +11,24 @@ class SetName extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SetName> createState() => _SetNameState();
+}
+
+class _SetNameState extends State<SetName> {
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    _controller.text = "";
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var inputName = SizedBox(
       width: MediaQuery.of(context).size.width / 1.5,
       child: TextField(
+        controller: _controller,
         textCapitalization: TextCapitalization.sentences,
         cursorColor: Colors.transparent,
         showCursor: false,
@@ -36,6 +50,54 @@ class SetName extends StatelessWidget {
       ),
     );
 
+    var btnValue = SizedBox(
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: ElevatedButton(
+        onPressed: () {
+          if (_controller.text.length > 1)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SetAge(
+                  color: widget.color,
+                  name: _controller.text,
+                ),
+              ),
+            );
+        },
+        child: Text(
+          "Далее",
+          style: Theme.of(context).textTheme.headline6!.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    var subTitle = Text(
+      "Введите имя вашего ребёнка",
+      textAlign: TextAlign.center,
+      style: Theme.of(context)
+          .textTheme
+          .subtitle2!
+          .copyWith(color: Colors.black54),
+    );
+
+    var title = Text(
+      "Имя вашего\nребёнка",
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline6,
+    );
+
     return Scaffold(
       appBar: buildAppBar(context),
       body: SizedBox(
@@ -43,51 +105,13 @@ class SetName extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Имя вашего\nребёнка",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline6,
-            ),
+            title,
             const SizedBox(height: 2 * kDeffaultPadding),
             inputName,
             const SizedBox(height: kDeffaultPadding),
-            Text(
-              "Введите имя вашего ребёнка",
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle2!
-                  .copyWith(color: Colors.black54),
-            ),
+            subTitle,
             const SizedBox(height: kDeffaultPadding),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SetAge(color: color),
-                    ),
-                  );
-                },
-                child: Text(
-                  "Далее",
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(color),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            btnValue,
           ],
         ),
       ),

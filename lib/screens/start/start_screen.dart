@@ -168,12 +168,14 @@ class _StartScreenState extends State<StartScreen>
       ),
     );
 
-    var choose = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        girl,
-        boy,
-      ],
+    var choose = SingleChildScrollView(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          girl,
+          boy,
+        ],
+      ),
     );
 
     var arrowPrev = Padding(

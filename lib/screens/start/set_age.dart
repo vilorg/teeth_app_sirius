@@ -1,20 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/set_avatar.dart';
 
-class SetAge extends StatelessWidget {
+class SetAge extends StatefulWidget {
   final Color color;
+  final String name;
+
   const SetAge({
     Key? key,
     required this.color,
+    required this.name,
   }) : super(key: key);
+
+  @override
+  State<SetAge> createState() => _SetAgeState();
+}
+
+class _SetAgeState extends State<SetAge> {
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    _controller.text = "";
+    super.initState();
+  }
+
+  var maskFormatter = MaskTextInputFormatter(mask: '##', filter: {
+    "#": RegExp(r'[0-9]'),
+  });
 
   @override
   Widget build(BuildContext context) {
     var inputName = SizedBox(
       width: MediaQuery.of(context).size.width / 1.5,
       child: TextField(
+        controller: _controller,
+        inputFormatters: [maskFormatter],
         textCapitalization: TextCapitalization.sentences,
         cursorColor: Colors.transparent,
         showCursor: false,
@@ -36,6 +59,55 @@ class SetAge extends StatelessWidget {
       ),
     );
 
+    var btnValue = SizedBox(
+      width: MediaQuery.of(context).size.width * 0.7,
+      child: ElevatedButton(
+        onPressed: () {
+          if (_controller.text.length >= 1)
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SetAvatar(
+                  name: widget.name,
+                  age: int.parse(_controller.text),
+                  color: widget.color,
+                ),
+              ),
+            );
+        },
+        child: Text(
+          "Далее",
+          style: Theme.of(context).textTheme.headline6!.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(widget.color),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    var subTitle = Text(
+      "Напишите пожалуйста возраст в месяцах",
+      textAlign: TextAlign.center,
+      style: Theme.of(context)
+          .textTheme
+          .subtitle2!
+          .copyWith(color: Colors.black54),
+    );
+
+    var title = Text(
+      "Возраст мальчика\n",
+      textAlign: TextAlign.center,
+      style: Theme.of(context).textTheme.headline6,
+    );
+
     return Scaffold(
       appBar: buildAppBar(context),
       body: SizedBox(
@@ -43,53 +115,13 @@ class SetAge extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Возраст мальчика\n",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline6,
-            ),
+            title,
             const SizedBox(height: 2 * kDeffaultPadding),
             inputName,
             const SizedBox(height: kDeffaultPadding),
-            Text(
-              "Напишите пожалуйста возраст в месяцах",
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle2!
-                  .copyWith(color: Colors.black54),
-            ),
+            subTitle,
             const SizedBox(height: kDeffaultPadding),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SetAvatar(
-                        color: color,
-                      ),
-                    ),
-                  );
-                },
-                child: Text(
-                  "Далее",
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(color),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            btnValue,
           ],
         ),
       ),

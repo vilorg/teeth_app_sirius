@@ -24,7 +24,7 @@ class _SetNameState extends State<SetName> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     var inputName = SizedBox(
       width: MediaQuery.of(context).size.width / 1.5,
       child: TextField(

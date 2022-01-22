@@ -23,15 +23,28 @@ class QuestionMany extends StatefulWidget {
 
 class _QuestionManyState extends State<QuestionMany> {
   List<Widget> data = [];
-  int select = 0;
+  List<bool> isSelect = [];
+  double sum = 0;
+
+  @override
+  void initState() {
+    for (double val in widget.weight) {
+      isSelect.add(false);
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    sum = 0;
     data = [];
+    for (int i = 0; i < widget.weight.length; i++) {
+      if (isSelect[i]) sum += widget.weight[i];
+    }
     for (int i = 0; i < widget.variants.length; i++) {
       data.add(buildAnswer(context, widget.variants[i], () {
-        setState(() => select = i + 1);
-        widget.setAnswer(widget.weight[i]);
+        setState(() => isSelect[i] = !isSelect[i]);
+        widget.setAnswer(sum);
       }, i + 1));
     }
     return Container(
@@ -82,14 +95,13 @@ class _QuestionManyState extends State<QuestionMany> {
               width: 30,
               height: 30,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
                 border: Border.all(
-                  color: index == select ? Color(0xFF8BC34A) : widget.color,
+                  color: isSelect[index - 1] ? Color(0xFF8BC34A) : widget.color,
                   width: 3,
                 ),
-                color: index == select ? Color(0xFF8BC34A) : Colors.white,
+                color: isSelect[index - 1] ? Color(0xFF8BC34A) : Colors.white,
               ),
-              child: index == select
+              child: isSelect[index - 1]
                   ? Icon(
                       Icons.done,
                       color: Colors.white,

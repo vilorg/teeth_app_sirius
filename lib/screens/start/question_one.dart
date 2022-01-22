@@ -9,9 +9,11 @@ class QuestionOne extends StatefulWidget {
     required this.question,
     required this.variants,
     required this.weight,
+    required this.setBool,
   }) : super(key: key);
 
   final Function setAnswer;
+  final VoidCallback setBool;
   final Color color;
   final List<String> variants;
   final List<double> weight;
@@ -30,6 +32,7 @@ class _QuestionOneState extends State<QuestionOne> {
     data = [];
     for (int i = 0; i < widget.variants.length; i++) {
       data.add(buildAnswer(context, widget.variants[i], () {
+        widget.setBool();
         setState(() => select = i + 1);
         widget.setAnswer(widget.weight[i]);
       }, i + 1));
@@ -72,7 +75,8 @@ class _QuestionOneState extends State<QuestionOne> {
       BuildContext context, String text, VoidCallback setAnswer, int index) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: kDeffaultPadding / 2),
-      child: GestureDetector(
+      child: InkWell(
+        splashColor: Colors.transparent,
         onTap: setAnswer,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

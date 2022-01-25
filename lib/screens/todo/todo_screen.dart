@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'body.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class TodoScreen extends StatelessWidget {
+  const TodoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       body: Body(),
     );
   }

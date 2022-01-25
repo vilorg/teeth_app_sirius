@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 const Color kPrimaryBoyColor = Color(0xFF6FBAFF);
+const Color kSecondaryBoyColor = Color(0xFF0085FF);
+
 const Color kPrimaryGirlColor = Color(0xFFFF95E1);
 const Color kBackgroundColor = Colors.white;
 const Color kPrimaryColor = Colors.green;

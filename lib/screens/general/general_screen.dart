@@ -2,6 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/home/home_screen.dart';
+import 'package:teeth_app_sirius/screens/timer/timer_screen.dart';
+import 'package:teeth_app_sirius/screens/todo/todo_screen.dart';
 
 class GeneralScreen extends StatefulWidget {
   const GeneralScreen({Key? key}) : super(key: key);
@@ -29,7 +31,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
       onWillPop: () async =>
           !await _navigatorKeys[_selectedIndex].currentState!.maybePop(),
       child: Scaffold(
-        extendBody: false,
+        extendBody: true,
         key: _key,
         bottomNavigationBar: buildBottomMenu(),
         body: Stack(
@@ -52,11 +54,11 @@ class _GeneralScreenState extends State<GeneralScreen> {
     return {
       '/': (context) {
         return const [
+          TodoScreen(),
           HomeScreen(),
           HomeScreen(),
           HomeScreen(),
-          HomeScreen(),
-          HomeScreen(),
+          TimerScreen(),
         ].elementAt(index);
       },
     };
@@ -89,7 +91,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
           () => _selectedIndex = value,
         ),
         backgroundColor: Colors.transparent,
-        color: kPrimaryBoyColor,
+        color: kSecondaryBoyColor,
         height: 60,
         items: [
           Icon(Icons.check_circle_rounded),

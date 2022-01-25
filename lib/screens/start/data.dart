@@ -74,17 +74,6 @@ List<DataQuestion> getQuestions2() {
   ];
 }
 
-class Area {
-  String name;
-  int value;
-
-  Area(this.name, this.value);
-}
-
-List<Area> getAreas() {
-  return [];
-}
-
 List<DataQuestion> getQuestions3() {
   return [
     DataQuestion(

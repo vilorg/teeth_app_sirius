@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
+import 'package:teeth_app_sirius/screens/general/general_screen.dart';
 import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/data.dart';
 import 'package:teeth_app_sirius/screens/start/question_many.dart';
@@ -150,9 +151,15 @@ class _QuestionsState extends State<Questions> {
           for (bool i in isAnswered) {
             if (!i) key = false;
           }
-          if (key)
+          if (key) {
             print(answer.reduce((value, element) => value + element));
-          else
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GeneralScreen(),
+                ),
+                (route) => false);
+          } else
             print("error");
         },
         child: Text(

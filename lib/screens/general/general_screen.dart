@@ -1,4 +1,6 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/home/home_screen.dart';
 
 class GeneralScreen extends StatefulWidget {
@@ -27,6 +29,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
       onWillPop: () async =>
           !await _navigatorKeys[_selectedIndex].currentState!.maybePop(),
       child: Scaffold(
+        extendBody: false,
         key: _key,
         bottomNavigationBar: buildBottomMenu(),
         body: Stack(
@@ -76,39 +79,27 @@ class _GeneralScreenState extends State<GeneralScreen> {
   }
 
   Widget buildBottomMenu() {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: (value) => setState(
-        () => _selectedIndex = value,
+    return Theme(
+      data: Theme.of(context).copyWith(
+        iconTheme: IconThemeData(color: Colors.white, size: 30),
       ),
-      showUnselectedLabels: false,
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.done),
-          label: 'Мероприятия',
-          backgroundColor: Colors.red
+      child: CurvedNavigationBar(
+        index: _selectedIndex,
+        onTap: (value) => setState(
+          () => _selectedIndex = value,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.auto_graph_sharp),
-          label: 'Прогноз',
-          backgroundColor: Colors.green
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-          backgroundColor: Colors.purple
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.question_answer_rounded),
-          label: 'FAQ',
-          backgroundColor: Colors.pink
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Settings',
-          backgroundColor: Colors.grey
-        ),
-      ],
+        backgroundColor: Colors.transparent,
+        color: kPrimaryBoyColor,
+        height: 60,
+        items: [
+          Icon(Icons.check_circle_rounded),
+          Icon(Icons.signal_cellular_alt),
+          Icon(Icons.home),
+          Icon(Icons.question_answer_rounded),
+          Icon(Icons.access_time_filled),
+        ],
+        animationDuration: Duration(milliseconds: 400),
+      ),
     );
   }
 }

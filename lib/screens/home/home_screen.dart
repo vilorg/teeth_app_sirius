@@ -5,9 +5,36 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("text"),
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              child: Stack(
+                children: [
+                  Container(
+                    child: Image.asset(
+                      "assets/images/background.png",
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                    ),
+                    width: double.infinity,
+                    height: 200,
+                  ),
+                  Positioned(
+                    left: MediaQuery.of(context).size.width / 2 - 100,
+                    bottom: 0,
+                    child: Image.asset(
+                      "assets/images/avatar.png",
+                      width: 200,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

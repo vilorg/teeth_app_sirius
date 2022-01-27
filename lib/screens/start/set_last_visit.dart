@@ -7,12 +7,12 @@ import 'package:teeth_app_sirius/screens/start/readiness.dart';
 class SetLastVisit extends StatefulWidget {
   const SetLastVisit({
     Key? key,
-    required this.color,
+    required this.isGerl,
     required this.name,
     required this.age,
   }) : super(key: key);
 
-  final Color color;
+  final bool isGerl;
   final String name;
   final int age;
 
@@ -54,10 +54,9 @@ class _SetLastVisitState extends State<SetLastVisit> {
     var underImage = Text(
       "Последнее посещение",
       textAlign: TextAlign.center,
-      style: Theme.of(context)
-          .textTheme
-          .headline5!
-          .copyWith(color: widget.color, fontWeight: FontWeight.bold),
+      style: Theme.of(context).textTheme.headline5!.copyWith(
+          color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
+          fontWeight: FontWeight.bold),
     );
 
     var textEdit = Padding(
@@ -68,6 +67,7 @@ class _SetLastVisitState extends State<SetLastVisit> {
       child: TextField(
         controller: _controller,
         inputFormatters: [maskFormatter],
+        keyboardType: TextInputType.datetime,
         decoration: InputDecoration(
           hintText: "31.12.2021",
           hintStyle: Theme.of(context)
@@ -106,7 +106,8 @@ class _SetLastVisitState extends State<SetLastVisit> {
               ),
         ),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(widget.color),
+          backgroundColor: MaterialStateProperty.all(
+              widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -128,7 +129,7 @@ class _SetLastVisitState extends State<SetLastVisit> {
               context,
               MaterialPageRoute(
                 builder: (context) => Readiness(
-                  color: widget.color,
+                  isGerl: widget.isGerl,
                   age: widget.age,
                   date: DateTime.parse(date[2] + "-" + date[1] + "-" + date[0]),
                   name: widget.name,
@@ -140,7 +141,7 @@ class _SetLastVisitState extends State<SetLastVisit> {
         child: Text(
           "Далее",
           style: Theme.of(context).textTheme.headline6!.copyWith(
-                color: widget.color,
+                color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
                 fontWeight: FontWeight.bold,
               ),
         ),
@@ -149,7 +150,10 @@ class _SetLastVisitState extends State<SetLastVisit> {
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
-              side: BorderSide(color: widget.color, width: 3),
+              side: BorderSide(
+                color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
+                width: 3,
+              ),
             ),
           ),
         ),

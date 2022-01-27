@@ -32,7 +32,7 @@ class _BodyState extends State<Body> {
             ringGradient: null,
             fillColor: kPrimaryBoyColor.withOpacity(0.4),
             fillGradient: null,
-            backgroundColor: kPrimaryBoyColor,
+            backgroundColor: kSecondaryBoyColor,
             backgroundGradient: null,
             strokeWidth: 20.0,
             strokeCap: StrokeCap.round,
@@ -78,7 +78,7 @@ class _BodyState extends State<Body> {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: kPrimaryBoyColor,
+                color: kSecondaryBoyColor,
                 shape: BoxShape.circle,
               ),
               child: Center(

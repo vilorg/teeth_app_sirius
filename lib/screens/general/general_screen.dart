@@ -1,7 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
+import 'package:teeth_app_sirius/screens/faq/faq_screen.dart';
 import 'package:teeth_app_sirius/screens/home/home_screen.dart';
+import 'package:teeth_app_sirius/screens/statistic/statistic_screen.dart';
 import 'package:teeth_app_sirius/screens/timer/timer_screen.dart';
 import 'package:teeth_app_sirius/screens/todo/todo_screen.dart';
 
@@ -55,9 +57,9 @@ class _GeneralScreenState extends State<GeneralScreen> {
       '/': (context) {
         return const [
           TodoScreen(),
+          StatisticScreen(),
           HomeScreen(),
-          HomeScreen(),
-          HomeScreen(),
+          FaqScreen(),
           TimerScreen(),
         ].elementAt(index);
       },

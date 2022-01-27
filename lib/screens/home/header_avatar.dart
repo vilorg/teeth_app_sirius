@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
+import 'package:teeth_app_sirius/screens/model/model_screen.dart';
 
 class HeaderAvatar extends StatelessWidget {
   const HeaderAvatar({
@@ -33,7 +34,13 @@ class HeaderAvatar extends StatelessWidget {
             top: kDeffaultPadding * 2,
             right: kDeffaultPadding,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ModelScreen(),
+                    ));
+              },
               child: Container(
                 width: 40,
                 height: 40,

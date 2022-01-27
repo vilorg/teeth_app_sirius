@@ -6,13 +6,13 @@ import 'package:teeth_app_sirius/screens/start/questions.dart';
 class Readiness extends StatelessWidget {
   const Readiness({
     Key? key,
-    required this.color,
+    required this.isGerl,
     required this.date,
     required this.name,
     required this.age,
   }) : super(key: key);
 
-  final Color color;
+  final bool isGerl;
   final DateTime date;
   final String name;
   final int age;
@@ -26,7 +26,7 @@ class Readiness extends StatelessWidget {
           Text(
             "Заполнение информации",
             style: Theme.of(context).textTheme.headline6!.copyWith(
-                  color: color,
+                  color: isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
                   fontWeight: FontWeight.bold,
                 ),
           ),
@@ -56,7 +56,8 @@ class Readiness extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Questions(color: color),
+                      builder: (context) => Questions(
+                          color: isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
                     ));
               },
               child: Text(
@@ -67,7 +68,8 @@ class Readiness extends StatelessWidget {
                     ),
               ),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(color),
+                backgroundColor: MaterialStateProperty.all(
+                    isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -85,7 +87,7 @@ class Readiness extends StatelessWidget {
               child: Text(
                 "Заполнить позже",
                 style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: color,
+                      color: isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -94,7 +96,9 @@ class Readiness extends StatelessWidget {
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: color, width: 3),
+                    side: BorderSide(
+                        color: isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
+                        width: 3),
                   ),
                 ),
               ),

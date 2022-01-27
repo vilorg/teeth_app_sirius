@@ -5,12 +5,12 @@ import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/set_avatar.dart';
 
 class SetAge extends StatefulWidget {
-  final Color color;
+  final bool isGerl;
   final String name;
 
   const SetAge({
     Key? key,
-    required this.color,
+    required this.isGerl,
     required this.name,
   }) : super(key: key);
 
@@ -31,8 +31,13 @@ class _SetAgeState extends State<SetAge> {
     "#": RegExp(r'[0-9]'),
   });
 
+  late String name;
+
   @override
   Widget build(BuildContext context) {
+    name = "мальчика";
+    if (widget.isGerl) name = "девочки";
+
     var inputName = SizedBox(
       width: MediaQuery.of(context).size.width / 1.5,
       child: TextField(
@@ -70,7 +75,7 @@ class _SetAgeState extends State<SetAge> {
                 builder: (context) => SetAvatar(
                   name: widget.name,
                   age: int.parse(_controller.text),
-                  color: widget.color,
+                  isGerl: widget.isGerl,
                 ),
               ),
             );
@@ -83,7 +88,8 @@ class _SetAgeState extends State<SetAge> {
               ),
         ),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(widget.color),
+          backgroundColor: MaterialStateProperty.all(
+              widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -103,7 +109,7 @@ class _SetAgeState extends State<SetAge> {
     );
 
     var title = Text(
-      "Возраст мальчика\n",
+      "Возраст $name\n",
       textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.headline6,
     );

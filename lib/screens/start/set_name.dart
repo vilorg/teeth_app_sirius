@@ -4,10 +4,10 @@ import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/set_age.dart';
 
 class SetName extends StatefulWidget {
-  final Color color;
+  final bool isGirl;
   const SetName({
     Key? key,
-    required this.color,
+    required this.isGirl,
   }) : super(key: key);
 
   @override
@@ -24,7 +24,7 @@ class _SetNameState extends State<SetName> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     var inputName = SizedBox(
       width: MediaQuery.of(context).size.width / 1.5,
       child: TextField(
@@ -59,7 +59,7 @@ class _SetNameState extends State<SetName> {
               context,
               MaterialPageRoute(
                 builder: (context) => SetAge(
-                  color: widget.color,
+                  isGerl: widget.isGirl,
                   name: _controller.text,
                 ),
               ),
@@ -73,7 +73,8 @@ class _SetNameState extends State<SetName> {
               ),
         ),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(widget.color),
+          backgroundColor: MaterialStateProperty.all(
+              widget.isGirl ? kPrimaryGirlColor : kPrimaryBoyColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

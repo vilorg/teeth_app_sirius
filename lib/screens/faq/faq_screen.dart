@@ -3,14 +3,15 @@ import 'package:teeth_app_sirius/constants.dart';
 
 import 'body.dart';
 
-class TimerScreen extends StatelessWidget {
-  const TimerScreen({Key? key}) : super(key: key);
+class FaqScreen extends StatelessWidget {
+  const FaqScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Body(),
+        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -21,6 +22,7 @@ class TimerScreen extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
         ),
+        child: Body(),
       ),
     );
   }

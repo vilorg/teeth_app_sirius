@@ -5,12 +5,12 @@ import 'package:teeth_app_sirius/screens/start/set_last_visit.dart';
 class SetAvatar extends StatefulWidget {
   const SetAvatar({
     Key? key,
-    required this.color,
+    required this.isGerl,
     required this.name,
     required this.age,
   }) : super(key: key);
 
-  final Color color;
+  final bool isGerl;
   final String name;
   final int age;
 
@@ -236,7 +236,7 @@ class _SetAvatarState extends State<SetAvatar> with TickerProviderStateMixin {
               context,
               MaterialPageRoute(
                 builder: (context) => SetLastVisit(
-                  color: widget.color,
+                  isGerl: widget.isGerl,
                   name: widget.name,
                   age: widget.age,
                 ),
@@ -251,7 +251,8 @@ class _SetAvatarState extends State<SetAvatar> with TickerProviderStateMixin {
               ),
         ),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(widget.color),
+          backgroundColor: MaterialStateProperty.all(
+              widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

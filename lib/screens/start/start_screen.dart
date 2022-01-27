@@ -252,9 +252,7 @@ class _StartScreenState extends State<StartScreen>
                             context,
                             MaterialPageRoute(
                               builder: (context) => SetName(
-                                color: isGirl
-                                    ? kPrimaryGirlColor
-                                    : kPrimaryBoyColor,
+                                isGirl: isGirl,
                               ),
                             ),
                           );

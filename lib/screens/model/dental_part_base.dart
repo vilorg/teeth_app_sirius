@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'body.dart';
 import 'teeth_positioned.dart';
 
 class DentalPartBase extends StatelessWidget {

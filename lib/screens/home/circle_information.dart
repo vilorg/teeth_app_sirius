@@ -6,16 +6,26 @@ import 'circle_information_item.dart';
 class CircleInformation extends StatelessWidget {
   const CircleInformation({
     Key? key,
+    required this.age,
+    required this.teeth,
   }) : super(key: key);
+  final int age;
+  final int teeth;
 
   @override
   Widget build(BuildContext context) {
+    String teethTitle = "зубов";
+    if (teeth == 1) teethTitle = "зуб";
+    if (teeth >= 2 && teeth <= 4) teethTitle = "зуба";
+    String mounthTitle = "месяцев";
+    if (age == 1) teethTitle = "месяц";
+    if (teeth >= 2 && teeth <= 4) mounthTitle = "месяца";
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleInformationItem(count: 17, title: "месяцев"),
+        CircleInformationItem(count: age, title: mounthTitle),
         SizedBox(width: kDeffaultPadding * 2),
-        CircleInformationItem(count: 2, title: "зуба"),
+        CircleInformationItem(count: teeth, title: teethTitle),
         SizedBox(width: kDeffaultPadding * 2),
         CircleInformationItem(count: 0, title: "угроз"),
       ],

@@ -1,15 +1,17 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/general/general_screen.dart';
+import 'package:teeth_app_sirius/screens/home/camera_app.dart';
 import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/data.dart';
 import 'package:teeth_app_sirius/screens/start/question_many.dart';
 import 'package:teeth_app_sirius/screens/start/question_one.dart';
 
 class Questions extends StatefulWidget {
-  const Questions({Key? key, required this.color}) : super(key: key);
+  const Questions({Key? key, required this.isGerl}) : super(key: key);
 
-  final Color color;
+  final bool isGerl;
 
   @override
   State<Questions> createState() => _QuestionsState();
@@ -51,7 +53,7 @@ class _QuestionsState extends State<Questions> {
               width: MediaQuery.of(context).size.width * 0.7,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(kDeffaultPadding),
-                color: widget.color,
+                color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
               ),
               child: Text(
                 "В каком регионе вы живёте?",
@@ -75,7 +77,8 @@ class _QuestionsState extends State<Questions> {
               child: Text(
                 "Определить локацию",
                 style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: widget.color,
+                      color:
+                          widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -84,7 +87,11 @@ class _QuestionsState extends State<Questions> {
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(color: widget.color, width: 3),
+                    side: BorderSide(
+                        color: widget.isGerl
+                            ? kPrimaryGirlColor
+                            : kPrimaryBoyColor,
+                        width: 3),
                   ),
                 ),
               ),
@@ -100,7 +107,7 @@ class _QuestionsState extends State<Questions> {
       // if (!data[i].isLow)
       if (data[i].isMany) {
         dataPaste.add(QuestionMany(
-          color: widget.color,
+          color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
           setAnswer: (value) => setState(() => answer[i] = value),
           question: data[i].title,
           weight: data[i].weight,
@@ -109,7 +116,7 @@ class _QuestionsState extends State<Questions> {
         isAnswered[i] = true;
       } else
         dataPaste.add(QuestionOne(
-          color: widget.color,
+          color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
           setAnswer: (value) => setState(() => answer[i] = value),
           question: data[i].title,
           variants: data[i].variants,
@@ -131,10 +138,10 @@ class _QuestionsState extends State<Questions> {
       children: [
         Text(
           "zubki.u.malytki",
-          style: Theme.of(context)
-              .textTheme
-              .headline6!
-              .copyWith(fontWeight: FontWeight.bold, color: widget.color),
+          style: Theme.of(context).textTheme.headline6!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor,
+              ),
         ),
         SizedBox(width: kDeffaultPadding / 2),
         Image.asset("assets/images/teethQuestions.png"),
@@ -146,19 +153,23 @@ class _QuestionsState extends State<Questions> {
       width: MediaQuery.of(context).size.width * 0.7,
       height: 90,
       child: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
           bool key = true;
           for (bool i in isAnswered) {
             if (!i) key = false;
           }
           if (key) {
-            print(answer.reduce((value, element) => value + element));
-            Navigator.pushAndRemoveUntil(
+            await availableCameras().then(
+              (value) => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GeneralScreen(),
+                  builder: (context) => CameraApp(
+                    cameras: value,
+                    points: answer.reduce((value, element) => value + element),
+                  ),
                 ),
-                (route) => false);
+              ),
+            );
           } else
             print("error");
         },
@@ -170,7 +181,8 @@ class _QuestionsState extends State<Questions> {
               ),
         ),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(widget.color),
+          backgroundColor: MaterialStateProperty.all(
+              widget.isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

@@ -1,12 +1,18 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
+import 'package:teeth_app_sirius/screens/home/camera_app.dart';
 import 'package:teeth_app_sirius/screens/model/model_screen.dart';
 
 class HeaderAvatar extends StatelessWidget {
   const HeaderAvatar({
     Key? key,
+    required this.isGerl,
+    required this.toTeeth,
   }) : super(key: key);
 
+  final bool isGerl;
+  final VoidCallback toTeeth;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +21,9 @@ class HeaderAvatar extends StatelessWidget {
         children: [
           Container(
             child: Image.asset(
-              "assets/images/background.png",
+              isGerl
+                  ? "assets/images/backgroundGerl.png"
+                  : "assets/images/backgroundBoy.png",
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
             ),
@@ -26,8 +34,11 @@ class HeaderAvatar extends StatelessWidget {
             left: MediaQuery.of(context).size.width / 2 - 100,
             bottom: 0,
             child: Image.asset(
-              "assets/images/avatar.png",
+              isGerl
+                  ? "assets/images/avatarGerl.png"
+                  : "assets/images/avatarBoy.png",
               width: 200,
+              height: 200,
             ),
           ),
           Positioned(
@@ -50,6 +61,27 @@ class HeaderAvatar extends StatelessWidget {
                 ),
                 child: Icon(
                   Icons.settings,
+                  size: 30,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: kDeffaultPadding * 2,
+            left: kDeffaultPadding,
+            child: InkWell(
+              onTap: ()  =>toTeeth
+
+             ,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+                child: Icon(
+                  Icons.view_module_rounded,
                   size: 30,
                 ),
               ),

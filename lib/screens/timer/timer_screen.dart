@@ -20,6 +20,9 @@ class TimerScreen extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          image: DecorationImage(
+            image: AssetImage("assets/images/backgroundTimerBoy.png"),
+          ),
         ),
       ),
     );

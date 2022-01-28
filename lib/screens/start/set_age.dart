@@ -3,6 +3,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/set_avatar.dart';
+import 'package:teeth_app_sirius/screens/start/set_last_visit.dart';
 
 class SetAge extends StatefulWidget {
   final bool isGerl;
@@ -72,7 +73,7 @@ class _SetAgeState extends State<SetAge> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => SetAvatar(
+                builder: (context) => SetLastVisit(
                   name: widget.name,
                   age: int.parse(_controller.text),
                   isGerl: widget.isGerl,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:teeth_app_sirius/constants.dart';
+import 'package:teeth_app_sirius/screens/general/general_screen.dart';
 import 'package:teeth_app_sirius/screens/start/build_app_bar.dart';
 import 'package:teeth_app_sirius/screens/start/questions.dart';
 
@@ -52,12 +54,16 @@ class Readiness extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.7,
             height: 90,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                var box = await Hive.openBox("startBox");
+                box.put("name", name);
+                box.put("isGerl", isGerl);
+                box.put("isFirst", false);
+                box.put("age", age);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Questions(
-                          color: isGerl ? kPrimaryGirlColor : kPrimaryBoyColor),
+                      builder: (context) => Questions(isGerl: isGerl),
                     ));
               },
               child: Text(
@@ -83,7 +89,43 @@ class Readiness extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.7,
             height: 90,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                var box = await Hive.openBox("startBox");
+                box.put("name", name);
+                box.put("isGerl", isGerl);
+                box.put("isFirst", false);
+                box.put("age", age);
+                box.put("teethUp", [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                ]);
+                box.put("teethDown", [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                ]);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GeneralScreen(),
+                  ),
+                );
+              },
               child: Text(
                 "Заполнить позже",
                 style: Theme.of(context).textTheme.headline6!.copyWith(

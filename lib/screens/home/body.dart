@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
 
-import 'btn_analys.dart';
 import 'circle_information.dart';
 import 'header_avatar.dart';
 import 'next_visit.dart';
@@ -9,28 +8,45 @@ import 'next_visit.dart';
 class Body extends StatelessWidget {
   const Body({
     Key? key,
+    required this.isGerl,
+    required this.name,
+    required this.teethUp,
+    required this.teethDown,
+    required this.age,
+    required this.toTeeth,
   }) : super(key: key);
+
+  final String name;
+  final bool isGerl;
+  final List<bool> teethUp;
+  final List<bool> teethDown;
+  final int age;
+  final VoidCallback toTeeth;
 
   @override
   Widget build(BuildContext context) {
+    int teeth = 0;
+
+    for (bool i in teethUp) if (i) teeth++;
+    for (bool i in teethDown) if (i) teeth++;
+
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
         children: [
-          HeaderAvatar(),
+          HeaderAvatar(isGerl: isGerl, toTeeth: toTeeth),
           SizedBox(height: kDeffaultPadding),
           Text(
-            "Baby",
+            name,
             style: Theme.of(context).textTheme.headline4!.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
           ),
           SizedBox(height: kDeffaultPadding),
-          CircleInformation(),
+          CircleInformation(age: age, teeth: teeth),
           SizedBox(height: kDeffaultPadding * 3),
           NextVisit(),
-          BtnAnalys(),
           SizedBox(
             height: 60,
           ),

@@ -60,16 +60,6 @@ class _StartScreenState extends State<StartScreen>
       btnColor = kTextColor;
 
     var girl = Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 45,
-            color: Colors.black12,
-            spreadRadius: 35,
-            offset: const Offset(0, -20),
-          ),
-        ],
-      ),
       margin: EdgeInsets.only(left: 2 * kDeffaultPadding),
       child: Stack(
         children: [
@@ -91,12 +81,15 @@ class _StartScreenState extends State<StartScreen>
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color:
-                        isSelect & isGirl ? Colors.green : Colors.transparent,
+                    color: isSelect & isGirl ? Colors.green : Colors.grey[300]!,
                     width: 3,
                   ),
                 ),
-                child: Image.asset("assets/images/girl.png"),
+                child: Image.asset(
+                  "assets/images/avatarGerl.png",
+                  width: 130,
+                  height: 130,
+                ),
               ),
             ),
           ),
@@ -113,16 +106,6 @@ class _StartScreenState extends State<StartScreen>
     );
 
     var boy = Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 45,
-            color: Colors.black12,
-            spreadRadius: 35,
-            offset: const Offset(0, -20),
-          ),
-        ],
-      ),
       margin: EdgeInsets.only(right: 2 * kDeffaultPadding),
       child: Stack(
         children: [
@@ -145,11 +128,15 @@ class _StartScreenState extends State<StartScreen>
                   shape: BoxShape.circle,
                   border: Border.all(
                     color:
-                        isSelect & !isGirl ? Colors.green : Colors.transparent,
+                        isSelect & !isGirl ? Colors.green : Colors.grey[300]!,
                     width: 3,
                   ),
                 ),
-                child: Image.asset("assets/images/boy.png"),
+                child: Image.asset(
+                  "assets/images/avatarBoy.png",
+                  width: 130,
+                  height: 130,
+                ),
               ),
             ),
           ),

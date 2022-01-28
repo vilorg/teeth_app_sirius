@@ -8,6 +8,7 @@ import 'constants.dart';
 
 void main() async {
   await Hive.initFlutter();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

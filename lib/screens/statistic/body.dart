@@ -7,12 +7,21 @@ import 'draw_graph.dart';
 class Body extends StatelessWidget {
   const Body({
     Key? key,
+    required this.points,
   }) : super(key: key);
+
+  final double? points;
 
   @override
   Widget build(BuildContext context) {
-    final List<double> data = [0, 1, 2, 2, 3, 4, 6];
+    List<double> coef = [0, 1, 2, 3, 4, 5.5, 6.5];
+    List<double> data = [0, 0, 0, 0, 0, 0, 0];
 
+    if (points != null) {
+      for (int i = 0; i < data.length; i++) {
+        data[i] = double.parse((coef[i] * points!).toStringAsFixed(2));
+      }
+    }
     return SingleChildScrollView(
       padding: EdgeInsets.all(kDeffaultPadding),
       child: Column(
@@ -24,10 +33,14 @@ class Body extends StatelessWidget {
             height: 400,
             padding: EdgeInsets.all(kDeffaultPadding),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.black45, width: 2),
-            ),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 4),
+                      blurRadius: 20),
+                ]),
             child: DrawGraph(points: data),
           ),
         ],

@@ -4,24 +4,30 @@ import 'package:teeth_app_sirius/constants.dart';
 import 'body.dart';
 
 class TimerScreen extends StatelessWidget {
-  const TimerScreen({Key? key}) : super(key: key);
+  final bool isGerl;
+  const TimerScreen({
+    Key? key,
+    required this.isGerl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Body(),
+        child: Body(isGerl:isGerl),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              kSecondaryBoyColor,
+              isGerl ? kSecondaryGirlColor : kSecondaryBoyColor,
               Colors.white,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           image: DecorationImage(
-            image: AssetImage("assets/images/backgroundTimerBoy.png"),
+            image: AssetImage(isGerl
+                ? "assets/images/backgroundTimerGerl.png"
+                : "assets/images/backgroundTimerBoy.png"),
           ),
         ),
       ),

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({Key? key, required this.isGerl}) : super(key: key);
+
+  final bool isGerl;
 
   @override
   State<Body> createState() => _BodyState();
@@ -31,9 +33,13 @@ class _BodyState extends State<Body> {
             ringColor: Colors.white,
             ringGradient:
                 LinearGradient(colors: [Color(0xFFD8E0E6), Colors.white]),
-            fillColor: kPrimaryBoyColor.withOpacity(0.4),
-            fillGradient: kTimerBoyGradient,
-            backgroundColor: kSecondaryBoyColor,
+            fillColor: widget.isGerl
+                ? kPrimaryGirlColor.withOpacity(0.4)
+                : kPrimaryBoyColor.withOpacity(0.4),
+            fillGradient:
+                widget.isGerl ? kTimerGerlGradient : kTimerBoyGradient,
+            backgroundColor:
+                widget.isGerl ? kSecondaryGirlColor : kSecondaryBoyColor,
             backgroundGradient: null,
             strokeWidth: 20.0,
             strokeCap: StrokeCap.round,
@@ -79,7 +85,7 @@ class _BodyState extends State<Body> {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: kSecondaryBoyColor,
+                color: widget.isGerl ? kSecondaryGirlColor : kSecondaryBoyColor,
                 shape: BoxShape.circle,
               ),
               child: Center(

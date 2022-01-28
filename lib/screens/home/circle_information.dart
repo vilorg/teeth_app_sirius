@@ -8,9 +8,12 @@ class CircleInformation extends StatelessWidget {
     Key? key,
     required this.age,
     required this.teeth,
+    required this.isGerl,
   }) : super(key: key);
+
   final int age;
   final int teeth;
+  final bool isGerl;
 
   @override
   Widget build(BuildContext context) {

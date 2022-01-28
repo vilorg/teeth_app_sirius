@@ -16,4 +16,11 @@ const Gradient kTimerBoyGradient = LinearGradient(
   ],
 );
 
+const Gradient kTimerGerlGradient = LinearGradient(
+  colors: [
+    Color(0xFFF6C2C9),
+    Color(0xFFF7C3CA),
+  ],
+);
+
 const double kDeffaultPadding = 20.0;

@@ -19,7 +19,7 @@ class CircleInformationItem extends StatelessWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: kPrimaryBoyColor,
+            color: Theme.of(context).primaryColor,
             shape: BoxShape.circle,
             border: Border.all(
               color: Colors.black12,

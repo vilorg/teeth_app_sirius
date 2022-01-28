@@ -1,18 +1,20 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:teeth_app_sirius/constants.dart';
-import 'package:teeth_app_sirius/screens/home/camera_app.dart';
-import 'package:teeth_app_sirius/screens/model/model_screen.dart';
 
 class HeaderAvatar extends StatelessWidget {
   const HeaderAvatar({
     Key? key,
     required this.isGerl,
     required this.toTeeth,
+    required this.toModel,
+    required this.isComplete,
   }) : super(key: key);
 
   final bool isGerl;
   final VoidCallback toTeeth;
+  final VoidCallback toModel;
+  final bool isComplete;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,13 +47,7 @@ class HeaderAvatar extends StatelessWidget {
             top: kDeffaultPadding * 2,
             right: kDeffaultPadding,
             child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ModelScreen(),
-                    ));
-              },
+              onTap: toModel,
               child: Container(
                 width: 40,
                 height: 40,
@@ -60,7 +56,7 @@ class HeaderAvatar extends StatelessWidget {
                   color: Colors.white,
                 ),
                 child: Icon(
-                  Icons.settings,
+                  Icons.view_module,
                   size: 30,
                 ),
               ),
@@ -69,23 +65,23 @@ class HeaderAvatar extends StatelessWidget {
           Positioned(
             top: kDeffaultPadding * 2,
             left: kDeffaultPadding,
-            child: InkWell(
-              onTap: ()  =>toTeeth
-
-             ,
-              child: Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-                child: Icon(
-                  Icons.view_module_rounded,
-                  size: 30,
-                ),
-              ),
-            ),
+            child: isComplete
+                ? InkWell(
+                    onTap: toTeeth,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: Icon(
+                        Icons.qr_code,
+                        size: 30,
+                      ),
+                    ),
+                  )
+                : SizedBox(),
           ),
         ],
       ),

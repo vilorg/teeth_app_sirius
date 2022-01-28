@@ -28,7 +28,7 @@ class TeethPositioned extends StatelessWidget {
         onTap: setVisible,
         child: AnimatedOpacity(
           duration: Duration(seconds: 1),
-          opacity: isVisible ? 0 : 1,
+          opacity: isVisible ? 1 : 0,
           child: Transform.scale(
             scale: scale,
             child: SvgPicture.asset(

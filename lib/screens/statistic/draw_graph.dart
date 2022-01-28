@@ -52,11 +52,11 @@ class DrawGraph extends StatelessWidget {
       spots: [
         FlSpot(0, 0),
         FlSpot(1, 2),
-        FlSpot(2, 3),
-        FlSpot(3, 5),
-        FlSpot(4, 6),
-        FlSpot(5, 9),
-        FlSpot(6, 11),
+        FlSpot(2, 4),
+        FlSpot(3, 6),
+        FlSpot(4, 8),
+        FlSpot(5, 11),
+        FlSpot(6, 13),
       ],
     );
 
@@ -67,15 +67,7 @@ class DrawGraph extends StatelessWidget {
       isStrokeCapRound: true,
       dotData: FlDotData(show: true),
       belowBarData: BarAreaData(show: false),
-      spots: const [
-        FlSpot(0, 0),
-        FlSpot(1, 1),
-        FlSpot(2, 2),
-        FlSpot(3, 2),
-        FlSpot(4, 3),
-        FlSpot(5, 4),
-        FlSpot(6, 6),
-      ],
+      spots: data,
     );
 
     return LineChart(
@@ -140,7 +132,7 @@ class DrawGraph extends StatelessWidget {
         ],
         minX: 0,
         maxX: 6,
-        maxY: 12,
+        maxY: 14,
         minY: 0,
       ),
     );

@@ -15,7 +15,7 @@ class NextVisit extends StatelessWidget {
         SizedBox(width: kDeffaultPadding),
         Icon(
           Icons.medical_services,
-          color: kPrimaryBoyColor,
+          color: Theme.of(context).primaryColor,
           size: 50,
         ),
         SizedBox(width: kDeffaultPadding),
@@ -38,7 +38,7 @@ class NextVisit extends StatelessWidget {
                 TextSpan(
                   text: "изменить",
                   style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: kPrimaryBoyColor,
+                        color: Theme.of(context).primaryColor,
                         fontStyle: FontStyle.italic,
                         decoration: TextDecoration.underline,
                       ),

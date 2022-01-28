@@ -4,7 +4,9 @@ import 'package:teeth_app_sirius/constants.dart';
 import 'body.dart';
 
 class StatisticScreen extends StatelessWidget {
-  const StatisticScreen({Key? key}) : super(key: key);
+  const StatisticScreen({Key? key, required this.points, required this.isGerl}) : super(key: key);
+  final double? points;
+  final bool isGerl;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class StatisticScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              kSecondaryBoyColor,
+              isGerl ? kSecondaryGirlColor : kSecondaryBoyColor,
               Colors.white,
             ],
             begin: Alignment.topLeft,
@@ -23,7 +25,7 @@ class StatisticScreen extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: Body(),
+          child: Body(points: points),
         ),
       ),
     );

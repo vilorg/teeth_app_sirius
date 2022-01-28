@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/screens/faq/faq_screen.dart';
 import 'package:teeth_app_sirius/screens/home/home_screen.dart';
+import 'package:teeth_app_sirius/screens/model/model_screen.dart';
 import 'package:teeth_app_sirius/screens/start/questions.dart';
 import 'package:teeth_app_sirius/screens/statistic/statistic_screen.dart';
 import 'package:teeth_app_sirius/screens/timer/timer_screen.dart';
@@ -22,6 +23,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
   late bool isGerl;
   late int age;
   late String name;
+  late double? points;
   bool isLoaded = false;
 
   int _selectedIndex = 2;
@@ -74,29 +76,39 @@ class _GeneralScreenState extends State<GeneralScreen> {
     );
   }
 
-  void _next() => Navigator.push(
+  void nextQuestions() => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => Questions(isGerl: isGerl),
         ),
       );
 
+  void nextModel() => Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ModelScreen(),
+        ),
+        (route) => false,
+      );
+
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {
     return {
       '/': (context) {
         return [
-          TodoScreen(),
-          StatisticScreen(),
+          TodoScreen(isGerl: isGerl),
+          StatisticScreen(points: points, isGerl: isGerl),
           HomeScreen(
             isGerl: isGerl,
             age: age,
             name: name,
             teethDown: teethDown,
             teethUp: teethUp,
-            toTeeth: _next,
+            toTeeth: nextQuestions,
+            toModel: nextModel,
+            isComplete: points == null ? true : false,
           ),
-          FaqScreen(),
-          TimerScreen(),
+          FaqScreen(isGerl: isGerl),
+          TimerScreen(isGerl: isGerl),
         ].elementAt(index);
       },
     };
@@ -121,15 +133,15 @@ class _GeneralScreenState extends State<GeneralScreen> {
   Widget buildBottomMenu() {
     return Theme(
       data: Theme.of(context).copyWith(
-        iconTheme: IconThemeData(color: Colors.white, size: 30),
-      ),
+          iconTheme: IconThemeData(color: Colors.white, size: 30),
+          primaryColor: isGerl ? kSecondaryGirlColor : kSecondaryBoyColor),
       child: CurvedNavigationBar(
         index: _selectedIndex,
         onTap: (value) => setState(
           () => _selectedIndex = value,
         ),
         backgroundColor: Colors.transparent,
-        color: kSecondaryBoyColor,
+        color: isGerl ? kSecondaryGirlColor : kSecondaryBoyColor,
         height: 60,
         items: [
           Icon(Icons.check_circle_rounded),
@@ -151,6 +163,7 @@ class _GeneralScreenState extends State<GeneralScreen> {
       teethDown = box.get("teethDown");
       name = box.get("name");
       isGerl = box.get("isGerl");
+      points = box.get("scores");
       isLoaded = true;
     });
   }

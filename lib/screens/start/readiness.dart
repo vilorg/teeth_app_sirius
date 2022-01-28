@@ -60,6 +60,30 @@ class Readiness extends StatelessWidget {
                 box.put("isGerl", isGerl);
                 box.put("isFirst", false);
                 box.put("age", age);
+                box.put("teethUp", [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                ]);
+                box.put("teethDown", [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                ]);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

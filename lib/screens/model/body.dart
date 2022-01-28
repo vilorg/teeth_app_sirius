@@ -1,20 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:teeth_app_sirius/constants.dart';
 import 'package:teeth_app_sirius/models/text_title.dart';
 
 import 'dental_part_base.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
 }
 
 class _BodyState extends State<Body> {
-  List<bool> isVisibleUp = [
+  List<bool> teethUp = [
     false,
     false,
     false,
@@ -24,21 +27,26 @@ class _BodyState extends State<Body> {
     false,
     false,
     false,
+    false
+  ];
+  List<bool> teethDown = [
     false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
   ];
 
-  List<bool> isVisibleDown = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ];
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +60,25 @@ class _BodyState extends State<Body> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               DentalPartBase(
-                isVisible: isVisibleUp,
-                setVisible: (index) =>
-                    setState(() => isVisibleUp[index] = !isVisibleUp[index]),
+                isVisible: teethUp,
+                setVisible: (index) {
+                  setState(
+                    () => teethUp[index] = !teethUp[index],
+                  );
+                  updateTeeth();
+                },
               ),
               SizedBox(height: 2 * kDeffaultPadding),
               Transform.rotate(
                 angle: pi,
                 child: DentalPartBase(
-                  isVisible: isVisibleDown,
-                  setVisible: (index) => setState(
-                      () => isVisibleDown[index] = !isVisibleDown[index]),
+                  isVisible: teethDown,
+                  setVisible: (index) {
+                    setState(
+                      () => teethDown[index] = !teethDown[index],
+                    );
+                    updateTeeth();
+                  },
                 ),
               ),
             ],
@@ -70,5 +86,20 @@ class _BodyState extends State<Body> {
         ],
       ),
     );
+  }
+
+  Future<void> getData() async {
+    var box = await Hive.openBox("startBox");
+
+    setState(() {
+      teethUp = box.get("teethUp");
+      teethDown = box.get("teethDown");
+    });
+  }
+
+  Future<void> updateTeeth() async {
+    var box = await Hive.openBox("startBox");
+    box.put("teethUp", teethUp);
+    box.put("teethDown", teethDown);
   }
 }

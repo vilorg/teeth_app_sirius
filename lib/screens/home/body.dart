@@ -14,6 +14,8 @@ class Body extends StatelessWidget {
     required this.teethDown,
     required this.age,
     required this.toTeeth,
+    required this.toModel,
+    required this.isComplete,
   }) : super(key: key);
 
   final String name;
@@ -22,6 +24,8 @@ class Body extends StatelessWidget {
   final List<bool> teethDown;
   final int age;
   final VoidCallback toTeeth;
+  final VoidCallback toModel;
+  final bool isComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,12 @@ class Body extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       child: Column(
         children: [
-          HeaderAvatar(isGerl: isGerl, toTeeth: toTeeth),
+          HeaderAvatar(
+            isGerl: isGerl,
+            toTeeth: toTeeth,
+            toModel: toModel,
+            isComplete: isComplete,
+          ),
           SizedBox(height: kDeffaultPadding),
           Text(
             name,
@@ -44,7 +53,7 @@ class Body extends StatelessWidget {
                 ),
           ),
           SizedBox(height: kDeffaultPadding),
-          CircleInformation(age: age, teeth: teeth),
+          CircleInformation(age: age, teeth: teeth, isGerl:isGerl),
           SizedBox(height: kDeffaultPadding * 3),
           NextVisit(),
           SizedBox(
